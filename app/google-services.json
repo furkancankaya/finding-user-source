@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "481802285994",
+    "project_id": "radon-6c4ed",
+    "storage_bucket": "radon-6c4ed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:481802285994:android:0cf507461e7f76265871d3",
+        "android_client_info": {
+          "package_name": "com.coxjepsy.radon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "481802285994-mii46fss2a9bunr1u1s540l0ud17ohoq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.coxjepsy.radon",
+            "certificate_hash": "3cef0e3f30ed0e0f82a0ebb307407f8075631217"
+          }
+        },
+        {
+          "client_id": "481802285994-imlm37pfp5hnh54e9vim9hbdhgl76rvk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqiDhXOeSzzGucpDkTjwVmK_aj_bnFc6c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "481802285994-imlm37pfp5hnh54e9vim9hbdhgl76rvk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ServerValue
 import com.google.firebase.ktx.Firebase
 
 /**
@@ -48,7 +49,7 @@ open class AnonymousAuthActivity : AppCompatActivity() {
 
 
     // [START declare_database_ref]
-    private lateinit var database: DatabaseReference
+    public lateinit var database: DatabaseReference
     // [END declare_database_ref]
     private lateinit var referrerClient: InstallReferrerClient
 
@@ -103,6 +104,7 @@ open class AnonymousAuthActivity : AppCompatActivity() {
                                         }
                                     }
 
+
                                     registerUser(user,utmsource, response )
 
 
@@ -147,6 +149,7 @@ open class AnonymousAuthActivity : AppCompatActivity() {
 
 
 
+
     private fun registerUser(user:FirebaseUser?, utmsource:String, referral:ReferrerDetails?=null){
         val x = User(
             uid = user!!.uid,
@@ -154,15 +157,20 @@ open class AnonymousAuthActivity : AppCompatActivity() {
             utm_source = utmsource,
             referral = referral
         )
-
+        val database=FirebaseDatabase.getInstance().reference
         database.child("users").child(user!!.uid).setValue(x,DatabaseReference.CompletionListener {error,ref ->
-            if (error!=null){
-                Log.w(TAG, "signInAnonymously:failure"+ error.message)
-                Toast.makeText(baseContext, "AnonymousRegistiratedFailed!!",
-                    Toast.LENGTH_SHORT).show()
+            if (error==null) {
+
+                database.child("usercounth").child(utmsource).child("guest")
+                    .setValue(ServerValue.increment(1))
             }
+
+
         })
+
+
     }
+
 
     private fun linkAccount() {
         // Create EmailAuthCredential with email and password

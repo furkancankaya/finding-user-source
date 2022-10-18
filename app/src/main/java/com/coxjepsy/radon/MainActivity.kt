@@ -43,7 +43,6 @@ class MainActivity : FirebaseUIActivity() {
 
     //realtime database
     private lateinit var binding: ActivityMainBinding
-    private lateinit var database : DatabaseReference
     //realtime database
 
 
@@ -115,7 +114,9 @@ class MainActivity : FirebaseUIActivity() {
             .setAvailableProviders(providers)
             .enableAnonymousUsersAutoUpgrade()
             .build()
-        signInLauncher.launch(signInIntent)
+        if (auth.currentUser==null || auth.currentUser!!.isAnonymous) {
+            signInLauncher.launch(signInIntent)
+        }
     }
 
 }

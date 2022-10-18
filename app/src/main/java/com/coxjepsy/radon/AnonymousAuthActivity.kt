@@ -40,7 +40,9 @@ open class AnonymousAuthActivity : AppCompatActivity() {
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         updateUI(currentUser)
-        signInAnonymously()
+        if (currentUser == null) {signInAnonymously()}
+
+
     }
     // [END on_start_check_user]
 
@@ -55,6 +57,7 @@ open class AnonymousAuthActivity : AppCompatActivity() {
         database = FirebaseDatabase.getInstance().reference
         // [END initialize_database_ref]
     }
+
 
 
 

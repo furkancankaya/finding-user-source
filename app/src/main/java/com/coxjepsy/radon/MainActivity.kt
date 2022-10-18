@@ -14,6 +14,8 @@ import com.coxjepsy.radon.ui.theme.RadonTheme
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.padding
 import com.coxjepsy.radon.databinding.ActivityMainBinding
+import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
@@ -34,7 +36,7 @@ import com.google.firebase.ktx.Firebase
 //google-site-verification=2hRVWMpqLveiE7GFf8YMWKW0KKyzZ0-uEWDzp8vzX4A
 
 
-class MainActivity : AnonymousAuthActivity() {
+class MainActivity : FirebaseUIActivity() {
 
     private lateinit var auth: FirebaseAuth
 
@@ -44,8 +46,12 @@ class MainActivity : AnonymousAuthActivity() {
     private lateinit var database : DatabaseReference
     //realtime database
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
 
 
         //realtime database
@@ -90,6 +96,26 @@ class MainActivity : AnonymousAuthActivity() {
         //firestore = FirebaseFirestore.getInstance();
         //Map<String,Object> user = new HashMap<>();
         //user.put
+
+
+        // See: https://developer.android.com/training/basics/intents/result
+        val signInLauncher = registerForActivityResult(
+            FirebaseAuthUIActivityResultContract()
+        ) { res ->
+            this.onSignInResult(res)
+        }
+
+        // Choose authentication providers
+        val providers = arrayListOf(
+            AuthUI.IdpConfig.EmailBuilder().build()
+        )
+// Create and launch sign-in intent
+        val signInIntent = AuthUI.getInstance()
+            .createSignInIntentBuilder()
+            .setAvailableProviders(providers)
+            .enableAnonymousUsersAutoUpgrade()
+            .build()
+        signInLauncher.launch(signInIntent)
     }
 
 }
